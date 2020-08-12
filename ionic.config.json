@@ -1,0 +1,7 @@
+{
+  "name": "guriev",
+  "integrations": {
+    "capacitor": {}
+  },
+  "type": "react"
+}
