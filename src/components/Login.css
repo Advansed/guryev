@@ -1,0 +1,37 @@
+.lgDiv{
+    width: 100%;
+    margin-top: 2em;
+    margin-left: 1.5em;
+    margin-right: 1.5em;
+}
+.lgText1{
+
+    text-align: left;
+    font: 28px/45px Arial;
+    letter-spacing: 0.22px;
+    color: #1E2432;
+    opacity: 1;    
+}
+.lgText3{
+
+    margin-top: 0.5em;
+    text-align: left;
+    font: 17px/20px Arial;
+    letter-spacing: -0.41px;
+    color: #1E2432;
+    opacity: 1;
+
+}
+.lgList1{
+
+    margin-top: 2em;
+    margin-left: 1.5em;
+    margin-right: 1.5em;
+}
+.lgLabel1 {
+    text-align: left;
+    font: 12px/15px Arial;
+    letter-spacing: -0.22px;
+    color: #1E2432;
+    opacity: 1;
+}

@@ -1,0 +1,55 @@
+ /* Главная страница */
+@media all {
+    .kr-icon {
+        width: 90%;
+        height: 90%;
+    }
+    .kr-avatar {
+        width: 2em;
+        height: 2em;
+    }
+}
+
+/* Applications CSS */
+@media all {
+
+    .srv-text {
+        margin-left: 1.5em;
+        font: 12px/15px Arial;
+        letter-spacing: 0.24px;
+        opacity: 1;
+    }
+    .srv-text-1{
+        font: 15px/18px Arial;
+        color: orange;
+    }
+    .srv-text-2{
+        font: 15px/18px Arial;
+        color: green;
+    }
+    .srv-text-3{
+        font: 15px/18px Arial;
+        color: red;
+    }
+    .srv-item {
+        padding-top: 1em;
+        padding-bottom: 1em;
+    }
+
+    .ml-15{
+        margin-left: 1.5em;
+    }
+}
+
+/* Market CSS */
+@media all {
+    #m-home{
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: left;
+    }
+
+    .m-card {
+        width: 43%;
+    }
+}
