@@ -1,6 +1,8 @@
 import React, { useState, useEffect } from "react"
 import { Store, getData } from "../pages/Store";
-import { IonCard, IonCardContent, IonList, IonItem, IonLabel, IonText, IonCardHeader, IonCol, IonRow, IonAvatar, IonIcon, IonGrid, IonToolbar, IonCardSubtitle, IonTextarea, IonButton, IonCardTitle, IonLoading } from "@ionic/react";
+import { IonCard, IonCardContent, IonList, IonItem, IonLabel, IonText, IonCardHeader
+    , IonCol, IonRow, IonAvatar, IonIcon, IonGrid, IonToolbar, IonCardSubtitle
+    , IonTextarea, IonButton, IonCardTitle, IonLoading } from "@ionic/react";
 import { personOutline, folderOutline, linkOutline, folderOpenOutline, walletOutline, ribbonOutline, createOutline, arrowBackOutline } from "ionicons/icons";
 import './Functions.css'
 import MaskedInput from "../mask/reactTextMask";
@@ -536,26 +538,24 @@ export function    Market(): JSX.Element{
     const [upd, setUpd] = useState(0);
 
     useEffect(()=>{
-        let params = { Родитель: group[0] }; Load(params)
-        console.log("useEffect")
-    }, [group, upd])
 
-    async function Load(params){
-        setLoad(true)
-        let res = await getData("М_Товары", params)
-        if(res.Код === 100) {
-            Store.dispatch({type: "goods", goods: res.Данные})
-            setInfo(res.Данные)
-        }
-        setLoad(false)
-    }
+        let goods = Store.getState().goods
+        let jarr: Array<any> = []
+        goods.forEach(elem => {
+            if(elem.Группа === group[0]) 
+                jarr = [...jarr, elem]
+        });
+        console.log("jarr")
+        console.log(jarr)
+        if(jarr === undefined) jarr = []
+        setInfo(jarr)
+        console.log(info)
+    }, [group, upd])
 
     function Item(props:{info}):JSX.Element {
         let el = props.info
-
         let elem = <></>
-        console.log(el)
-        if(el.Группа) {
+        if(el.ЭтоГруппа) {
             elem = <>
                 <IonCard class="m-card" onClick={()=>{
                     setGroup([el.Код, ...group])
@@ -605,7 +605,6 @@ export function    Market(): JSX.Element{
                 <IonButton onClick={()=>{
                    let jarr = group; jarr.shift();
                     setGroup(jarr);
-                    console.log(group)
                     setUpd(upd + 1);
                 }}>
                     <IonIcon icon={ arrowBackOutline }/>

@@ -1,9 +1,20 @@
 import { combineReducers  } from 'redux'
 import axios from 'axios'
 import { Reducer } from 'react';
+import { stat } from 'fs';
 
 var reducers: Array<Reducer<any, any>>;reducers = [];
 
+interface t_goods {
+    Группа:             "",
+    Код:                "",
+    Наименование:       "",
+    Артикул:            "",
+    КонтрольОстатков:   "",
+    Вид:                "",
+    Цена:               "",
+    Картинка:           "",
+}
 
 const i_state = {
     auth:       false,
@@ -82,6 +93,14 @@ for(const [key, value] of Object.entries(i_state)){
     )
 }
 
+
+function gdReducer(state = i_state.goods, action){
+    switch(action.type) {
+        case "goods": return [...state, ...action.goods]
+        default: return state
+    }
+}
+
 const       rootReducer = combineReducers({
 
     auth:       reducers[0],
@@ -92,7 +111,7 @@ const       rootReducer = combineReducers({
     services:   reducers[5],
     docs:       reducers[6],
     pages:      reducers[7],
-    goods:      reducers[8],
+    goods:      gdReducer,
 
 })
 
@@ -135,14 +154,15 @@ export const Store = create_Store(rootReducer, i_state)
 export const URL = "https://mfu24.ru/guryev/hs/MyAPI/V1/"
 
 async function execs() {
-    let res = await getData("У_Услуги", {})
-    if(res.Код === 100) {
-        Store.dispatch({type: "services", services: res.Данные})
-    }
+    // let res = await getData("У_Услуги", {})
+    // if(res.Код === 100) {
+    //     Store.dispatch({type: "services", services: res.Данные})
+    // }
 }
 
 export async function getDatas(){
     let res = await getData("Баланс", Store.getState().login)
+
     if(res.Код === 100){
         res.Данные.Бонусы.type = "bonuses"
 
@@ -168,6 +188,26 @@ export async function getDatas(){
     if(res.Код === 100) {
         Store.dispatch({type: "docs", docs: res.Данные})
     }
+
+    getGoods("")
+
+}
+
+async function getGoods(parent: string){
+
+    let param = { Родитель: parent };
+    let res = await getData("М_Товары", param)
+    if(res.Код === 100) {
+        Store.dispatch({type: "goods", goods: res.Данные})
+
+        let jarr = res.Данные
+        jarr.forEach(elem => {
+            if(elem.ЭтоГруппа){
+                getGoods(elem.Код)
+            }
+        });
+    }
+    console.log(Store.getState().goods);
 
 }
 
