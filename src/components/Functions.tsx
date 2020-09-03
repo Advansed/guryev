@@ -555,7 +555,7 @@ export function    Market(): JSX.Element{
     function Item(props:{info}):JSX.Element {
         let el = props.info
         let elem = <></>
-        if(el.ЭтоГруппа) {
+        if(el.Группа) {
             elem = <>
                 <IonCard class="m-card" onClick={()=>{
                     setGroup([el.Код, ...group])
