@@ -1,7 +1,6 @@
 import { combineReducers  } from 'redux'
 import axios from 'axios'
 import { Reducer } from 'react';
-import { stat } from 'fs';
 
 var reducers: Array<Reducer<any, any>>;reducers = [];
 
